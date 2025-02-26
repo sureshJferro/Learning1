@@ -1,0 +1,61 @@
+<div class="signup-container">
+    <div class="signup-card">
+      <h2 style="color: aliceblue">Sign Up</h2>
+  
+      <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" [ngClass]="{'blurred': !isSignupAvailable}">
+        <div *ngIf="f['username'].errors?.['required'] && f['username'].touched" class="error-message">
+            Username is required
+          </div>
+          <mat-form-field appearance="fill" class="full-width">
+            <input matInput formControlName="username" placeholder="Enter your username*">
+            <mat-icon matSuffix>person</mat-icon>
+          </mat-form-field>
+          
+          <!-- Email -->
+          <div *ngIf="f['email'].touched && f['email'].errors" class="error-message">
+            <span *ngIf="f['email'].errors?.['required']">Email is required</span>
+            <span *ngIf="f['email'].errors?.['email']">Invalid email format</span>
+          </div>
+          <mat-form-field appearance="fill" class="full-width">
+            <input matInput formControlName="email" placeholder="Enter your email*">
+            <mat-icon matSuffix>email</mat-icon>
+          </mat-form-field>
+          
+          <!-- Password -->
+          <div *ngIf="f['password'].touched && f['password'].errors" class="error-message">
+            <span *ngIf="f['password'].errors?.['required']">Password is required</span>
+            <span *ngIf="f['password'].errors?.['minlength']">Password must be at least 6 characters</span>
+          </div>
+          <mat-form-field appearance="fill" class="full-width">
+            <input matInput formControlName="password" placeholder="Enter your password*" [type]="hide ? 'password' : 'text'">
+            <button mat-icon-button matSuffix (click)="hide = !hide">
+              <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
+          </mat-form-field>
+          
+          <!-- Confirm Password -->
+          <div *ngIf="f['confirmPassword'].touched && (f['confirmPassword'].errors?.['required'] || signupForm.errors?.['passwordMismatch'])" class="error-message">
+            <span *ngIf="f['confirmPassword'].errors?.['required']">Confirm Password is required</span>
+            <span *ngIf="signupForm.errors?.['passwordMismatch']">Passwords do not match</span>
+          </div>
+          <mat-form-field appearance="fill" class="full-width">
+            <input matInput formControlName="confirmPassword" placeholder="Confirm your password*" [type]="hide ? 'password' : 'text'">
+            <button mat-icon-button matSuffix (click)="hide = !hide">
+              <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
+          </mat-form-field>
+  
+        <button mat-raised-button color="primary" class="signup-button" type="submit">Sign Up</button>
+      </form>
+      <div class="feature-unavailable" *ngIf="!isSignupAvailable">
+        <p>This feature is currently unavailable.</p>
+      </div>
+      <h3 style="color:white">or</h3>
+        
+      <button mat-raised-button color="primary" class="google-signup-btn" (click)="signUpWithGoogle()">
+        <mat-icon>person_add</mat-icon> Sign Up with Google
+      </button>
+      <p class="login-link">Already have an account? <a [routerLink]="'/login'" class="signin-link">Login</a></p>
+    </div>
+  </div>
+  

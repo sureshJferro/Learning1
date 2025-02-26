@@ -1,0 +1,74 @@
+ /* Full-page background with centering */
+ .login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: url('/assets/img/login.jpg') no-repeat center center/cover;
+    backdrop-filter: blur(5px);
+}
+
+/* Stylish login card */
+.login-card {
+    width: 400px;
+    padding: 40px;
+    background: #2c3e50; /* Semi-transparent for glassmorphism effect */
+    backdrop-filter: blur(10px);
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Login heading */
+.login-card h2 {
+    color: white;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Form fields */
+.full-width {
+    width: 100%;
+    border-radius: 50px;
+}
+
+/* Styling for input fields */
+mat-form-field {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+/* Login button */
+.login-button {
+    width: 100%;
+    margin-top: 15px;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 25px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    transition: all 0.3s ease-in-out;
+}
+
+.login-button:hover {
+    background: linear-gradient(135deg, #5a67d8, #6b46c1);
+}
+
+/* Register link */
+.register-link {
+    margin-top: 15px;
+    font-size: 14px;
+    color: white;
+}
+
+.register-link a {
+    text-decoration: none;
+    color: #f39c12;
+    font-weight: bold;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+}
