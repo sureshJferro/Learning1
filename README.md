@@ -3,7 +3,7 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.7.
 
 ## Overview
-🚀 Firebase Authentication (Google Sign-In)
+🚀 Firebase Authentication (Google and Email/Password Sign-In)
 
 ## Development server
 
