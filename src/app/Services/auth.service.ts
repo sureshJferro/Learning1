@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
   
-
   constructor(
     private toastr: ToastrService,
     private userService: UserService,
@@ -54,5 +53,8 @@ export class AuthService {
   }
   logout(){
     localStorage.removeItem("userToken");
+  }
+  isAuthenticated(){
+    return !!localStorage.getItem("userToken");
   }
 }
