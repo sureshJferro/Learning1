@@ -31,6 +31,8 @@ import { UserService } from './Services/user.service';
 import { PublicapiComponent } from './Components/publicapi/publicapi.component';
 import { HttpClientModule } from '@angular/common/http';
 import { GoogleMapsModule } from '@angular/google-maps';
+import { AIParentComponent } from './Components/aiparent/aiparent.component';
+import { AIChildComponent } from './Components/aichild/aichild.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +41,9 @@ import { GoogleMapsModule } from '@angular/google-maps';
     NavBarComponent,
     HomeComponent,
     DashboardComponent,
-    PublicapiComponent
+    PublicapiComponent,
+    AIParentComponent,
+    AIChildComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,4 @@
+<p>aiparent works!</p>
+<p>{{ message }}</p>
+<p>{{childMsg}}</p>
+<app-aichild [parentMessage]="message" (childMessage)="receiveMessage($event)"></app-aichild>

@@ -6,6 +6,8 @@ import { HomeComponent } from './Components/home/home.component';
 import { DashboardComponent } from './Components/dashboard/dashboard.component';
 import { PublicapiComponent } from './Components/publicapi/publicapi.component';
 import { authGuard } from './Guard/auth.guard';
+import { AIParentComponent } from './Components/aiparent/aiparent.component';
+import { AIChildComponent } from './Components/aichild/aichild.component';
 
 
 const routes: Routes = [
@@ -16,6 +18,8 @@ const routes: Routes = [
     children:[
       {path: 'dashboard',component: DashboardComponent, canActivate: [authGuard]},
       {path: 'public',component: PublicapiComponent, canActivate: [authGuard]},
+      {path: 'ai',component: AIParentComponent, canActivate: [authGuard]},
+      {path: 'aichild',component: AIChildComponent, canActivate: [authGuard]},
     ]
    },
 ];

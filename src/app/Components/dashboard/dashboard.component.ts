@@ -31,7 +31,7 @@ export class DashboardComponent {
         title: 'AI & NLP APIs', 
         description: 'Open AI API, Gemini, Hugging Face API, Claude API, and Grok API can help developers experiment with AI models and tools.', 
         image: 'assets/img/alnlp.gif',
-             path:'ainlp'
+             path:'ai'
       },
       { 
         title: 'Sports API', 
