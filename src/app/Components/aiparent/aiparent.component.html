@@ -1,4 +1,13 @@
 <p>aiparent works!</p>
 <p>{{ message }}</p>
 <p>{{childMsg}}</p>
+<button (click)="getUsersfromAPI()">Fetch Users</button>
+<button (click)="startFilter()">Start Filter</button>
+<button (click)="startMergeMap()">Start Merge</button>
+<input type="number" [(ngModel)]="filterid" >
+<input type="name" [(ngModel)]="name" placeholder="name">
+<ul>
+  <li *ngFor="let user of users">{{ user.name }}</li>
+</ul>
+             
 <app-aichild [parentMessage]="message" (childMessage)="receiveMessage($event)"></app-aichild>

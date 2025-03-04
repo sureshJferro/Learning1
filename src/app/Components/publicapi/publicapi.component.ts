@@ -159,7 +159,6 @@ export class PublicapiComponent {
 
     this.geoService.getPostalCode(this.postalCode, this.country).subscribe((response:any) => {
       if (response.postalCodes.length > 0) {
-        debugger
         const location = response.postalCodes[0];
         this.lat = location.lat;
         this.lng = location.lng;
