@@ -1,16 +1,18 @@
 <div class="sidebar" [ngClass]="{ 'sidebar-collapsed': isSidebarCollapsed }">
     <div class="sidebar-header">
-      <a href="#" class="sidebar-logo">{{
-        isSidebarCollapsed ? 'C' : 'Learning'
-      }}</a>
+      <a href="javascript:void(0);" class="sidebar-logo">{{
+        isSidebarCollapsed ? 'C' : ''
+      }}</a><br>
     </div>
+    <i  class="submenu-title"><i style="font:initial;font-size: 25px;"> {{userEmail}}</i></i>
     <div class="sidebar-menu">
       <ul>
         <ng-container *ngFor="let item of menuItems">
           <li class="sidebar-menu-item">
             
             <a
-              href="#"
+            (click)="handleNavigation(item)"
+            href="javascript:void(0);"
               class="sidebar-item"
               [ngClass]="{
                 'has-children': item.children,
@@ -19,7 +21,7 @@
               (click)="toggleMenuItem(item)"
             >
             <i [class]="item.icon"></i>
-              <span class="sidebar-item-text">{{ item.label }}</span>
+              <span class="sidebar-item-text">   {{ item.label }}</span>
             </a>
           </li>
         </ng-container>

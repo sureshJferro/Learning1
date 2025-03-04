@@ -1,0 +1,107 @@
+<div class="api-container" *ngIf="!isNasaApi && !isWorldbankApi && !isStreetmapApi">
+    <div class="api-card" *ngFor="let api of publicapi" (click)="onApiClick(api)">
+        <h3>{{ api.title }}</h3>
+        <p>{{ api.description }}</p>
+        <div class="image-wrapper">
+            <img [src]="api.image" alt="{{ api.title }}" class="api-image" />
+        </div>
+        <!-- <div class="gif-wrapper">
+            <img [src]="api.animatedGif" alt="{{ api.title }} animation" class="api-gif" />
+        </div> -->
+    </div>
+</div>
+<div  *ngIf="isNasaApi">
+    <div class="nasa-container">
+        <h2>🔭 NASA API Explorer</h2>
+        
+        <label for="api-select">Choose a NASA API:</label>
+        <select id="api-select" [(ngModel)]="selectedApi">
+            <option value="" disabled selected>Select an API</option>
+            <option *ngFor="let api of nasaApis" [value]="api.url">
+                {{ api.name }}
+            </option>
+        </select>
+    
+        <div class="date-container" *ngIf="selectedApi.includes('apod') || selectedApi.includes('earth')">
+            <label for="datePicker">Select Date:</label>
+            <input id="datePicker" type="date" [(ngModel)]="selectedDate" />
+        </div>
+    
+        <button class="fetch-btn" (click)="fetchApiData()" [disabled]="!selectedApi">🚀 Fetch Data</button>
+        <button class="clear-btn" (click)="clearResults()" *ngIf="apiResponse">❌ Clear</button>
+    <!-- APOD Custom Display -->
+    <div class="apod-container" *ngIf="apodData">
+        <div class="nav-buttons">
+            <button class="nav-btn" (click)="changeDate(-1)">⏪ Previous</button>
+            <button class="nav-btn" (click)="changeDate(1)">Next ⏩</button>
+        </div>
+        <button class="close-btn" (click)="clearResults()">✖</button>
+        <h4>{{ apodData.title }}</h4>
+        <p><strong>Date:</strong> {{ apodData.date }}</p>
+        <p>{{ apodData.explanation }}</p>
+
+        <div *ngIf="apodData.media_type === 'image'">
+            <img [src]="apodData.url" [alt]="apodData.title" class="apod-image" />
+        </div>
+
+        <div *ngIf="apodData.media_type === 'video'">
+            <iframe [src]="apodData.url" frameborder="0" allowfullscreen class="apod-video"></iframe>
+        </div>
+    </div>
+        <div class="result-container" *ngIf="apiResponse">
+            <button class="close-btn" (click)="clearResults()">✖</button>
+            <pre>{{ apiResponse | json }}</pre>
+        </div>
+    </div>
+ 
+    
+</div>
+<div *ngIf="isWorldbankApi" class="worldbank-api-container">
+    <div class="date-container">
+      <label for="datePicker">Select Date:</label>
+      <input id="datePicker" type="date" [(ngModel)]="selectedDate" />
+    </div>
+  
+    <div class="button-container">
+      <button class="fetch-btn" (click)="fetchWordBank(selectedDate)">🚀 Fetch Data</button>
+      <button class="clear-btn" (click)="clearResults()" *ngIf="apiResponse">❌ Clear</button>
+    </div>
+  
+    <div class="response-container" *ngIf="apiResponse?.documents">
+        <div *ngFor="let doc of apiResponse.documents | keyvalue">
+            <div class="document-card" *ngIf="$any(doc.value).display_title && $any(doc.value).docdt">            
+          <h4>{{ $any(doc.value).display_title }}</h4>
+          <p><strong>Date:</strong> {{ $any(doc.value).docdt | date:'medium' }}</p>
+          <p>
+            <strong>URL: </strong>
+            <a [href]="$any(doc.value).url" target="_blank">{{ $any(doc.value).url }}</a>
+          </p>
+          <div class="pdf-container">
+            <iframe [src]="getSafeUrl($any(doc.value).pdfurl)" frameborder="0" class="pdf-iframe"></iframe>
+          </div>
+        </div>
+        </div>
+      </div>
+  </div>
+  <div *ngIf="isStreetmapApi"  class="worldbank-api-container">
+    <h3>Street Map Search</h3>
+
+    <div class="date-container">
+      <label class="form-label fw-bold">Postal Code:</label>
+      <input [(ngModel)]="postalCode" class="form-control" placeholder="Enter Postal Code">
+
+      <label class="form-label fw-bold">Country Code:</label>
+      <input [(ngModel)]="country" class="form-control" placeholder="Enter Country Code">
+    </div>
+
+    <div class="button-container">
+      <button class="btn btn-primary w-100" (click)="searchLocation()">
+        <i class="me-2"></i> 🚀 Search
+      </button>
+    </div>
+
+    <div *ngIf="showLocationDetails" class="mt-4">
+      <div class="map-container rounded-4 overflow-hidden"></div>
+    </div>
+</div>
+

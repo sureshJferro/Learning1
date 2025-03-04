@@ -4,6 +4,8 @@ import {GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from "
 import {auth} from "../../firebase/firebase.config"
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { UserService } from '../../Services/user.service';
+import { AuthService } from '../../Services/auth.service';
 
 
 @Component({
@@ -15,7 +17,10 @@ export class LoginComponent {
   hide = true;
   loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder,private toastr:ToastrService, private router: Router) {
+  constructor(private fb: FormBuilder,private toastr:ToastrService, 
+     private router: Router
+    ,private userService:UserService
+    ,private authservice:AuthService) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
@@ -26,11 +31,16 @@ async login(){
     this.loginForm.markAllAsTouched(); // Show errors if form is invalid
     return;
   }
-   debugger
-   try {
 var data = this.loginForm.value;
-    const userCredential = await signInWithEmailAndPassword(auth,data.email,data.password);
-    this.toastr.success(`Welcome back, ${userCredential.user.email}!`, 'Login Successful');
+   
+   try {
+    const userCredential = await this.authservice.login(data);
+    this.toastr.success(`Welcome back, ${userCredential.user.displayName}!`, ' Login Successful');
+    if(userCredential.user!=null && userCredential.user.displayName!=null){
+      this.userService.setUsername(userCredential.user.displayName); 
+    }  
+    localStorage.setItem('userToken',userCredential.user.refreshToken)
+    this.router.navigate(['/secure/dashboard']);
     } catch (error: any) {
       if (error.code === 'auth/user-not-found') {
         this.toastr.error('User not found. Please sign up first.', 'Login Error');
@@ -51,31 +61,6 @@ var data = this.loginForm.value;
   // console.log('Logging in with:', this.loginForm.value);
 }
 async loginInWithGoogle() {
-  const provider = new GoogleAuthProvider(); 
-  provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
-  auth.languageCode = 'it';
-  signInWithPopup(auth, provider)
-  .then((result) => {
-    // This gives you a Google Access Token. You can use it to access the Google API.
-    const credential = GoogleAuthProvider.credentialFromResult(result);
-    //const token = credential.accessToken;
-    // The signed-in user info.
-    const user = result.user;
-    console.log('User Info:', result.user);
-    this.toastr.success('login Successful!');
-    this.router.navigate(['/secure/dashboard']);
-  }).catch((error) => {
-    // Handle Errors here.
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    this.toastr.error(errorMessage);
-    // The email of the user's account used.
-    const email = error.customData.email;
-    // The AuthCredential type that was used.
-    const credential = GoogleAuthProvider.credentialFromError(error);
-    // ...
-  });
-      
-    
+ this.authservice.loginWithGoogle();   
   }
 }

@@ -4,6 +4,7 @@ import { SignupComponent } from './Components/signup/signup.component';
 import { LoginComponent } from './Components/login/login.component';
 import { HomeComponent } from './Components/home/home.component';
 import { DashboardComponent } from './Components/dashboard/dashboard.component';
+import { PublicapiComponent } from './Components/publicapi/publicapi.component';
 
 
 const routes: Routes = [
@@ -12,8 +13,8 @@ const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'secure', component: HomeComponent,
     children:[
-      {
-      path: 'dashboard',component: DashboardComponent}
+      {path: 'dashboard',component: DashboardComponent},
+      {path: 'public',component: PublicapiComponent},
     ]
    },
 ];

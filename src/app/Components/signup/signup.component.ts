@@ -5,6 +5,7 @@ import {signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { auth } from '../../firebase/firebase.config';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { UserService } from '../../Services/user.service';
 
 
 @Component({
@@ -17,7 +18,7 @@ export class SignupComponent {
   hide = true;
   submitted = false;
   isSignupAvailable=false;
-  constructor(private fb: FormBuilder,private afAuth: AngularFireAuth,private tostr:ToastrService,private router:Router) {
+  constructor(private fb: FormBuilder,private afAuth: AngularFireAuth,private tostr:ToastrService,private router:Router,private userService:UserService) {
     this.signupForm = this.fb.group(
       {
         username: ['', Validators.required],
@@ -52,7 +53,8 @@ Object.values(this.signupForm.controls).forEach(control => {
 else{
   //this.createuser(this.signupForm.value);
   console.log('Signup Successful', this.signupForm.value);
-    this.tostr.success('Signup Successful!');
+
+    this.tostr.success('Signup Successful! ');
    
 }
     
@@ -72,7 +74,10 @@ else{
     // The signed-in user info.
     const user = result.user;
     // console.log('User Info:', result.user);
-    this.tostr.success('Signup Successful!');
+    this.tostr.success('Signup Successful! ');
+    if(user!=null && user.displayName!=null){
+      this.userService.setUsername(user.displayName); 
+    }  
     this.router.navigate(['/secure/dashboard']);
   }).catch((error) => {
     // Handle Errors here.
@@ -85,12 +90,5 @@ else{
     const credential = GoogleAuthProvider.credentialFromError(error);
     // ...
   });
-      
-    
-  }
-
-  async logout() {
-    await this.afAuth.signOut();
-    alert('Logged out!');
   }
 }

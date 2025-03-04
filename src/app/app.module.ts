@@ -27,6 +27,10 @@ import { ToastrModule } from 'ngx-toastr';
 import { NavBarComponent } from './Components/nav-bar/nav-bar.component';
 import { HomeComponent } from './Components/home/home.component';
 import { DashboardComponent } from './Components/dashboard/dashboard.component';
+import { UserService } from './Services/user.service';
+import { PublicapiComponent } from './Components/publicapi/publicapi.component';
+import { HttpClientModule } from '@angular/common/http';
+import { GoogleMapsModule } from '@angular/google-maps';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,12 +38,13 @@ import { DashboardComponent } from './Components/dashboard/dashboard.component';
     SignupComponent,
     NavBarComponent,
     HomeComponent,
-    DashboardComponent
+    DashboardComponent,
+    PublicapiComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-
+    HttpClientModule,
     // Firebase Modules
     AngularFireModule.initializeApp(environment.firebase), // Initialize Firebase
     AngularFireAuthModule, // Enable Firebase Authentication
@@ -49,20 +54,21 @@ import { DashboardComponent } from './Components/dashboard/dashboard.component';
     MatInputModule,
     MatIconModule,
     MatButtonModule,
-
+    GoogleMapsModule,
     // Forms Modules
     FormsModule,
     ReactiveFormsModule,
-
     // Browser Animations
     BrowserAnimationsModule,
     ToastrModule.forRoot({
       positionClass: 'toast-top-center', // Ensure it's set correctly
       preventDuplicates: true
-    })
+    }),
+   
   ],
   providers: [
-    provideAnimationsAsync() // Provide animations (if needed)
+    provideAnimationsAsync(),
+    UserService
   ],
   bootstrap: [AppComponent],
 })

@@ -1,0 +1,11 @@
+{
+  "/api": {
+    "target": "https://search.worldbank.org",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "pathRewrite": {
+      "^/api": ""
+    }
+  }
+}
