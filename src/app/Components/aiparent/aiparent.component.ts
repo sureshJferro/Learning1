@@ -11,6 +11,7 @@ export class AIParentComponent {
   message: string = 'Hello from Parent!';
   childMsg: string = '';
   users: any[] = [];
+  posts: any[] = [];
   result: number = 0;
   filterid: number = 0;
   name: string = '';
@@ -19,7 +20,9 @@ export class AIParentComponent {
 
   receiveMessage(event: string) {
     this.childMsg = event;
-    console.log('Message received from child:', event);
+  }
+  fillPosts(event:any){
+    this.posts=event;
   }
   getUsersfromAPI() {
     this.http.get('https://jsonplaceholder.typicode.com/users')
