@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, ContentChild, contentChild, ElementRef, EventEmitter, Input, Output } from '@angular/core';
 import { GeonamesService } from '../../Services/geonames.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-aichild',
@@ -11,8 +12,12 @@ export class AIChildComponent {
   childmsg : string = ''; // Local variable
   @Output() childMessage = new EventEmitter<string>(); // Sending to parent
   @Output() childPosts = new EventEmitter<any>(); // Sending to parent
-constructor(private geoservices:GeonamesService){
+  @ContentChild('parenttext') paragraph!: ElementRef;
+constructor(private geoservices:GeonamesService,private tostr :ToastrService){
 
+}
+getparentmessage(){
+  alert(this.paragraph.nativeElement.textContent);
 }
   sendMessage() {
     this.childMessage.emit(this.childmsg);
@@ -25,5 +30,7 @@ constructor(private geoservices:GeonamesService){
     complete: () => console.log('Request completed')
     });
   }
-
+  childcomponentmessage() {
+   this.tostr.success("Called via @ChildComponent Concept!!!");
+  }
 }

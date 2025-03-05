@@ -1,4 +1,4 @@
-<p>aiparent works!</p>
+<p >aiparent works!</p>
 <p>{{ message }}</p>
 <p>{{childMsg}}</p>
 <button (click)="getUsersfromAPI()">Fetch Users</button>
@@ -10,10 +10,12 @@
   <li *ngFor="let user of users">{{ user.name }}</li>
 </ul>
              
-<app-aichild [parentMessage]="message" (childMessage)="receiveMessage($event)" (childPosts)="fillPosts($event)"></app-aichild>
+<app-aichild [parentMessage]="message" (childMessage)="receiveMessage($event)" (childPosts)="fillPosts($event)">
+  <p #parenttext>gdhalkfhlkahslhfslkfl</p>
+</app-aichild>
+<button (click)="Viewchildmsg()">View Child msg</button>
 
-
-<h4 *ngIf="let post of posts">POSTS</h4>
+<h4 *ngIf="posts.length>0">POSTS</h4>
 <ol>
   <li *ngFor="let post of posts" style="padding: 10px;">
 <a><b>{{ post.title }} - </b><i>{{post.body}}</i></a></li>

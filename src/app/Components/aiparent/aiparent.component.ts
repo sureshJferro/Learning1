@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { from, filter, Observable,mergeMap } from 'rxjs';
+import { AIChildComponent } from '../aichild/aichild.component';
 
 @Component({
   selector: 'app-aiparent',
@@ -15,9 +16,11 @@ export class AIParentComponent {
   result: number = 0;
   filterid: number = 0;
   name: string = '';
-
+  @ViewChild(AIChildComponent) child!: AIChildComponent;
   constructor(private http: HttpClient) {}
-
+  Viewchildmsg() {
+    this.child.childcomponentmessage();
+  }
   receiveMessage(event: string) {
     this.childMsg = event;
   }
