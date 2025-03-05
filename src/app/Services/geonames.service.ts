@@ -17,12 +17,13 @@ export class GeonamesService {
     return this.http.get(url);
   }
   getPosts():Observable<any>{
-    return this.http.get('https://jsonplaceholder.typicode.com/posts').pipe(
+    return this.http.get('https://jsonplaceholder.typicode.com/post').pipe(
       retry(3), // Retry the request 3 times
-      catchError((error) => {
-        console.error('Failed after 3 retries');
-        return throwError(() => new Error('Failed to fetch data!'));
-      })
+      catchError(this.handleError      )
     );
+  }
+  private handleError(error: any) {
+    console.error('An error occurred:', error);
+    return throwError(() => new Error('Failed to fetch posts. Try again later.'));
   }
 }
