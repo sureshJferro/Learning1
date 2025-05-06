@@ -45,6 +45,13 @@ export class DashboardComponent {
         image: 'assets/img/mis.gif',
              path:'miscellaneous'
       }
+      ,
+      { 
+        title: '.NET Core8', 
+        description: 'The latest version of ASP.NET Core 8 for optimal performance and modern development practices.', 
+        image: 'assets/img/restapi.gif',
+        path:'core8'
+      }
     ];
 
     onApiClick(api: any) {

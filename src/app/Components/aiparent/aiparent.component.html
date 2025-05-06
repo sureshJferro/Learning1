@@ -9,7 +9,7 @@
 <ul>
   <li *ngFor="let user of users">{{ user.name }}</li>
 </ul>
-             
+
 <app-aichild [parentMessage]="message" (childMessage)="receiveMessage($event)" (childPosts)="fillPosts($event)">
   <p #parenttext>gdhalkfhlkahslhfslkfl</p>
 </app-aichild>
@@ -19,4 +19,17 @@
 <ol>
   <li *ngFor="let post of posts" style="padding: 10px;">
 <a><b>{{ post.title }} - </b><i>{{post.body}}</i></a></li>
-</ol>
+</ol> 
+
+<div class="layout-column align-items-center mt-50">
+
+  <section class="layout-row align-items-center justify-content-between">
+    <label>Celsius: </label>
+    <input type="number" class="large" [(ngModel)]= Celsius data-test-id="celsius-input" (keyup)="keyupCelsius()"/>
+  </section>
+
+  <section class="layout-row align-items-center justify-content-between">
+      <label>Fahrenheit: </label>
+      <input type="number" class="large" [(ngModel)]=Faren data-test-id="fahrenheit-input" (keyup)="keyupFaren()"/>
+  </section>
+</div>

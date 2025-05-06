@@ -17,9 +17,9 @@ export class GeonamesService {
     return this.http.get(url);
   }
   getPosts():Observable<any>{
-    return this.http.get('https://jsonplaceholder.typicode.com/post').pipe(
+    return this.http.get('https://jsonplaceholder.typicode.com/posts').pipe(
       retry(3), // Retry the request 3 times
-      catchError(this.handleError      )
+      catchError(this.handleError)
     );
   }
   private handleError(error: any) {

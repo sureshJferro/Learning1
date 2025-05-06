@@ -16,6 +16,8 @@ export class AIParentComponent {
   result: number = 0;
   filterid: number = 0;
   name: string = '';
+  Celsius:number=0;
+  Faren:number=0;
   @ViewChild(AIChildComponent) child!: AIChildComponent;
   constructor(private http: HttpClient) {}
   Viewchildmsg() {
@@ -72,4 +74,18 @@ export class AIParentComponent {
       complete: () => console.log('MergeMap Observable Completed')
     });
   }
+  ngOnInit() {
+    this.Celsius=78.7;
+    // C = (F − 32) × 5/9
+    // F = C*9/5 + 32
+  }
+keyupCelsius(){
+  var cel= (this.Celsius * 9/5 + 32).toFixed(1);
+  this.Faren =parseFloat(cel);
+
+}
+keyupFaren(){
+ var faren= ((this.Faren - 32) * 5/9).toFixed(1);
+  this.Celsius = parseFloat(faren);
+}
 }

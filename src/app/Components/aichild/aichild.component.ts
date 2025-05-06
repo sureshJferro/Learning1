@@ -24,10 +24,11 @@ getparentmessage(){
   }
   GetPosts() {
     this.geoservices.getPosts().subscribe({
-    //console.log(data);
-    next: (data) => this.childPosts.emit(data),
+    //console.log(data)
+    next: (data) => {this.childPosts.emit(data);console.log(data);},
     error: (err) => this.childPosts.emit(err.message),
-    complete: () => console.log('Request completed')
+    complete: () => console.log('Request completed'),
+    
     });
   }
   childcomponentmessage() {

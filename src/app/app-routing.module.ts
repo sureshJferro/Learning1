@@ -8,6 +8,7 @@ import { PublicapiComponent } from './Components/publicapi/publicapi.component';
 import { authGuard } from './Guard/auth.guard';
 import { AIParentComponent } from './Components/aiparent/aiparent.component';
 import { AIChildComponent } from './Components/aichild/aichild.component';
+import { ApiauthComponent } from './Components/apiauth/apiauth/apiauth.component';
 
 
 const routes: Routes = [
@@ -20,6 +21,7 @@ const routes: Routes = [
       {path: 'public',component: PublicapiComponent, canActivate: [authGuard]},
       {path: 'ai',component: AIParentComponent, canActivate: [authGuard]},
       {path: 'aichild',component: AIChildComponent, canActivate: [authGuard]},
+      {path: 'core8',component: ApiauthComponent, canActivate: [authGuard]},
     ]
    },
 ];

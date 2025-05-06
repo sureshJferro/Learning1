@@ -33,6 +33,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { AIParentComponent } from './Components/aiparent/aiparent.component';
 import { AIChildComponent } from './Components/aichild/aichild.component';
+import { ApiauthComponent } from './Components/apiauth/apiauth/apiauth.component';
+import { CoreapiService } from './Services/coreapi.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +45,8 @@ import { AIChildComponent } from './Components/aichild/aichild.component';
     DashboardComponent,
     PublicapiComponent,
     AIParentComponent,
-    AIChildComponent
+    AIChildComponent,
+    ApiauthComponent
   ],
   imports: [
     BrowserModule,
@@ -72,7 +75,8 @@ import { AIChildComponent } from './Components/aichild/aichild.component';
   ],
   providers: [
     provideAnimationsAsync(),
-    UserService
+    UserService,
+    CoreapiService
   ],
   bootstrap: [AppComponent],
 })

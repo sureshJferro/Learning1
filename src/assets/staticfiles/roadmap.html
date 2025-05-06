@@ -1,0 +1,409 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Angular Developer Roadmap</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      line-height: 1.6;
+      background-color: #f9f9f9;
+    }
+    h1, h2, h3 {
+      color: #2c3e50;
+    }
+    ul {
+      list-style-type: disc;
+      margin-left: 20px;
+    }
+    section {
+      margin-bottom: 40px;
+    }
+    .level {
+      font-weight: bold;
+      font-size: 1.3em;
+      background-color: #dcdcdc;
+      padding: 8px;
+      border-radius: 5px;
+    }
+    .concept {
+      margin-left: 20px;
+    }
+    summary {
+      font-weight: bold;
+      cursor: pointer;
+    }
+    details {
+      margin-bottom: 10px;
+    }
+    pre {
+      background: #eee;
+      padding: 10px;
+      border-left: 3px solid #888;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Angular Developer Roadmap (Concept-Wise)</h1>
+
+  <section>
+    <h2 class="level">🟢 Beginner Level: Angular Fundamentals</h2>
+
+    <details open>
+      <summary>1. HTML, CSS, and JavaScript (Pre-requisite)</summary>
+      <ul class="concept">
+        <li><strong>Semantic HTML:</strong> Use meaningful tags like &lt;header&gt;, &lt;nav&gt;, &lt;article&gt;, etc.</li>
+        <li><strong>CSS Flexbox & Grid:</strong> Used for creating responsive layouts.</li>
+        <li><strong>JavaScript ES6+ Features:</strong> let/const, arrow functions, promises, etc.</li>
+        <li><strong>DOM Manipulation:</strong> Using JS to interact with HTML elements.</li>
+      </ul>
+      <pre><code>
+// JavaScript ES6+ Example
+const greet = (name) => `Hello, ${name}`;
+console.log(greet("Angular Dev")); // Output: Hello, Angular Dev
+      </code></pre>
+    </details>
+
+    <details open>
+      <summary>2. TypeScript</summary>
+      <ul class="concept">
+        <li><strong>Types:</strong> Static typing with number, string, boolean, etc.</li>
+        <li><strong>Interfaces & Enums:</strong> Custom types and enums for constants.</li>
+        <li><strong>Classes & Access Modifiers:</strong> OOP features in TypeScript.</li>
+        <li><strong>Generics:</strong> Reusable components with flexible types.</li>
+        <li><strong>Decorators:</strong> Meta-programming syntax used in Angular.</li>
+      </ul>
+      <pre><code>
+// TypeScript Interface Example
+interface User {
+  name: string;
+  age: number;
+}
+
+const user: User = { name: "John", age: 30 };
+      </code></pre>
+    </details>
+  </section>
+
+  <section>
+    <h2 class="level">🟡 Intermediate Level: Angular Core Concepts</h2>
+
+    <details open>
+      <summary>3. Angular Setup & Architecture</summary>
+      <ul class="concept">
+        <li><strong>Installing Angular CLI:</strong> <code>npm install -g @angular/cli</code></li>
+        <li><strong>Creating a Project:</strong> <code>ng new my-app</code></li>
+        <li><strong>Folder Structure:</strong> src/app contains all components, services, modules, etc.</li>
+        <li><strong>Modules and Components:</strong> Modular structure with reusability and separation of concerns.</li>
+      </ul>
+      <pre><code>
+// Example: Creating a component
+ng generate component my-component
+
+// app.module.ts example
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { AppComponent } from './app.component';
+
+@NgModule({
+  declarations: [AppComponent],
+  imports: [BrowserModule],
+  bootstrap: [AppComponent]
+})
+export class AppModule {}
+      </code></pre>
+    </details>
+
+    <details open>
+      <summary>4. Components</summary>
+      <ul class="concept">
+        <li><strong>Component Creation:</strong> Use CLI: <code>ng generate component</code></li>
+        <li><strong>Component Metadata:</strong> Decorated with <code>@Component</code> to define selector, template, and style.</li>
+        <li><strong>Template and Styles:</strong> Inline or external files for HTML and CSS.</li>
+        <li><strong>Lifecycle Hooks:</strong> <code>ngOnInit</code>, <code>ngOnDestroy</code>, etc., used to manage component state and side effects.</li>
+      </ul>
+      <pre><code>
+// my-component.component.ts
+import { Component, OnInit, OnDestroy } from '@angular/core';
+
+@Component({
+  selector: 'app-my-component',
+  template: '<h2>Hello from MyComponent</h2>',
+  styles: ['h2 { color: green; }']
+})
+export class MyComponent implements OnInit, OnDestroy {
+  ngOnInit() {
+    console.log('Component initialized');
+  }
+
+  ngOnDestroy() {
+    console.log('Component destroyed');
+  }
+}
+      </code></pre>
+    </details>
+
+    <details open>
+        <summary>5. Data Binding</summary>
+        <ul class="concept">
+          <li>
+            <strong>Interpolation ({{ }})</strong><br/>
+            Used to display dynamic data in templates.<br/>
+            <code>&lt;h1&gt;Welcome {{ username }}!&lt;/h1&gt;</code>
+          </li>
+          <li>
+            <strong>Property Binding ([property])</strong><br/>
+            Binds DOM element property to component property.<br/>
+            <code>&lt;img [src]="imageUrl" /&gt;</code>
+          </li>
+          <li>
+            <strong>Event Binding ((event))</strong><br/>
+            Responds to user actions.<br/>
+            <code>&lt;button (click)="handleClick()"&gt;Click&lt;/button&gt;</code>
+          </li>
+          <li>
+            <strong>Two-way Binding ([(ngModel)])</strong><br/>
+            Combines property and event binding for form inputs (requires FormsModule).<br/>
+            <code>&lt;input [(ngModel)]="name" /&gt;</code>
+          </li>
+        </ul>
+      </details>
+      
+      <details open>
+        <summary>6. Directives</summary>
+        <ul class="concept">
+          <li>
+            <strong>Built-in Directives:</strong><br/>
+            <code>*ngIf, *ngFor, [ngClass], [ngStyle]</code><br/>
+            <pre><code>*ngIf: &lt;p *ngIf="isLoggedIn"&gt;Welcome back!&lt;/p&gt;
+      *ngFor: &lt;li *ngFor="let item of items"&gt;{{ item }}&lt;/li&gt;
+      [ngClass]: &lt;div [ngClass]="{'active': isActive}"&gt;&lt;/div&gt;
+      [ngStyle]: &lt;div [ngStyle]="{'color': textColor}"&gt;&lt;/div&gt;</code></pre>
+          </li>
+          <li>
+            <strong>Attribute vs Structural Directives</strong><br/>
+            - Attribute directives modify element appearance/behavior (e.g., <code>[ngClass]</code>).<br/>
+            - Structural directives change the DOM layout (e.g., <code>*ngIf, *ngFor</code>).
+          </li>
+          <li>
+            <strong>Creating custom directives</strong><br/>
+            Example: HighlightDirective<br/>
+            <pre><code>@Directive({
+        selector: '[appHighlight]'
+      })
+      export class HighlightDirective {
+        constructor(el: ElementRef) {
+          el.nativeElement.style.backgroundColor = 'yellow';
+        }
+      }</code></pre>
+          </li>
+        </ul>
+      </details>
+      
+      <details open>
+        <summary>7. Component Communication</summary>
+        <ul class="concept">
+          <li>
+            <strong>@Input() and @Output()</strong><br/>
+            - <code>@Input()</code> passes data from parent to child.<br/>
+            - <code>@Output()</code> sends events from child to parent.
+            <pre><code>Parent: &lt;child [data]="parentData" (notify)="onNotify()"&gt;&lt;/child&gt;
+      
+      Child:
+      @Input() data: string;
+      @Output() notify = new EventEmitter();</code></pre>
+          </li>
+          <li>
+            <strong>EventEmitter</strong><br/>
+            Used with <code>@Output()</code> to emit custom events.<br/>
+            <code>this.notify.emit('Data from child');</code>
+          </li>
+          <li>
+            <strong>ViewChild and ContentChild</strong><br/>
+            - <code>@ViewChild</code> accesses child component/directive in template.<br/>
+            - <code>@ContentChild</code> accesses projected content.<br/>
+            <pre><code>@ViewChild(ChildComponent) childComp!: ChildComponent;
+      ngAfterViewInit() {
+        console.log(this.childComp.someMethod());
+      }</code></pre>
+          </li>
+          <li>
+            <strong>Shared Service for communication</strong><br/>
+            Best for sibling component communication.<br/>
+            <pre><code>service.sendMessage('Hello');
+      service.message$.subscribe(msg =&gt; this.received = msg);</code></pre>
+          </li>
+        </ul>
+      </details>
+      
+      <details open>
+        <summary>8. Services and Dependency Injection</summary>
+        <ul class="concept">
+          <li>
+            <strong>Creating and injecting services</strong><br/>
+            Generate with Angular CLI: <code>ng generate service my-service</code><br/>
+            Inject in constructor:<br/>
+            <code>constructor(private myService: MyService) {}</code>
+          </li>
+          <li>
+            <strong>Using @Injectable()</strong><br/>
+            Marks a class as injectable and available to be used in DI system.<br/>
+            <pre><code>@Injectable({
+        providedIn: 'root'
+      })
+      export class MyService {}</code></pre>
+          </li>
+          <li>
+            <strong>Hierarchical injectors</strong><br/>
+            - Services provided in <code>AppModule</code> are singleton.<br/>
+            - Services provided in components have limited scope to that component and its children.
+          </li>
+        </ul>
+      </details>      
+  </section>
+
+  <section>
+    <h2 class="level">Advanced Level: Application Development</h2>
+
+    <details>
+      <summary>9. Routing & Navigation</summary>
+      <ul class="concept">
+        <li>Setting up routes</li>
+        <li>Route parameters and query params</li>
+        <li>Route guards (AuthGuard, CanActivate, CanDeactivate)</li>
+        <li>Lazy loading modules</li>
+      </ul>
+    </details>
+
+    <details>
+      <summary>10. Forms in Angular</summary>
+      <ul class="concept">
+        <li>Template-driven forms</li>
+        <li>Reactive forms</li>
+        <li>Form validation (sync/async)</li>
+        <li>FormBuilder & FormGroup</li>
+      </ul>
+    </details>
+
+    <details>
+      <summary>11. Observables and RxJS</summary>
+      <ul class="concept">
+        <li>Observables, Subjects, and BehaviorSubjects</li>
+        <li>RxJS Operators (map, filter, switchMap, mergeMap, debounceTime)</li>
+        <li>Subscription management</li>
+        <li>Handling async data with async pipe</li>
+      </ul>
+    </details>
+
+    <details>
+      <summary>12. HTTP Client</summary>
+      <ul class="concept">
+        <li>Making HTTP requests (GET, POST, PUT, DELETE)</li>
+        <li>HttpHeaders and HttpParams</li>
+        <li>Interceptors (auth, logging, error handling)</li>
+        <li>Error handling with catchError</li>
+      </ul>
+    </details>
+
+    <details>
+      <summary>13. Pipes</summary>
+      <ul class="concept">
+        <li>Built-in Pipes (date, currency, async)</li>
+        <li>Custom pipes</li>
+      </ul>
+    </details>
+  </section>
+
+  <section>
+    <h2 class="level">Expert Level: Production-Ready Apps</h2>
+
+    <details>
+      <summary>14. State Management</summary>
+      <ul class="concept">
+        <li>Local component state</li>
+        <li>Service-based state</li>
+        <li>NgRx or other state management libraries</li>
+      </ul>
+    </details>
+
+    <details>
+      <summary>15. Authentication & Authorization</summary>
+      <ul class="concept">
+        <li>Login/Logout with JWT</li>
+        <li>Protecting routes</li>
+        <li>Role-based access control</li>
+      </ul>
+    </details>
+
+    <details>
+      <summary>16. Unit Testing & E2E Testing</summary>
+      <ul class="concept">
+        <li>Testing components, services, pipes</li>
+        <li>Jasmine & Karma</li>
+        <li>Angular Testing Utilities</li>
+        <li>Cypress/Protractor (for E2E)</li>
+      </ul>
+    </details>
+
+    <details>
+      <summary>17. Performance Optimization</summary>
+      <ul class="concept">
+        <li>Lazy loading</li>
+        <li>ChangeDetection strategies</li>
+        <li>Pure pipes</li>
+        <li>trackBy in ngFor</li>
+      </ul>
+    </details>
+
+    <details>
+      <summary>18. Angular Animations</summary>
+      <ul class="concept">
+        <li>Animation states & transitions</li>
+        <li>Using @angular/animations</li>
+      </ul>
+    </details>
+  </section>
+
+  <section>
+    <h2 class="level">Bonus & Real-World Topics</h2>
+
+    <details>
+      <summary>19. Angular Universal (SSR)</summary>
+      <ul class="concept">
+        <li>Server-side rendering basics</li>
+        <li>SEO benefits</li>
+      </ul>
+    </details>
+
+    <details>
+      <summary>20. Progressive Web Apps (PWA)</summary>
+      <ul class="concept">
+        <li>Service Workers</li>
+        <li>Offline capabilities</li>
+      </ul>
+    </details>
+
+    <details>
+      <summary>21. Monorepos with Nx</summary>
+      <ul class="concept">
+        <li>Nx workspace structure</li>
+        <li>Libraries and apps organization</li>
+      </ul>
+    </details>
+
+    <details>
+      <summary>22. Deployment</summary>
+      <ul class="concept">
+        <li>Building with ng build</li>
+        <li>Deploying to Firebase, Netlify, or AWS</li>
+      </ul>
+    </details>
+  </section>
+
+</body>
+</html>

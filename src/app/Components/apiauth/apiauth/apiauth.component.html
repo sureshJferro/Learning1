@@ -1,0 +1,72 @@
+<div style="max-width: 800px; margin: auto; font-family: 'Segoe UI', sans-serif;">
+    <h2 style="text-align: center; color: #2c3e50;">JWT & Access Token Management</h2>
+  
+    <!-- JWT Section -->
+    <div style="background: #ffffff; border: 1px solid #ddd; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+      <h3 style="color: #34495e;">Step 1: Get JWT</h3>
+      <button (click)="GetJWT()" style="padding: 10px 20px; background-color: #2980b9; color: white; border: none; border-radius: 4px; cursor: pointer;">
+        Get JWT
+      </button>
+  
+      <div *ngIf="token" style="margin-top: 15px;">
+        <label><strong>JWT:</strong></label>
+        <pre style="background-color: #f9f9f9; padding: 15px; border: 1px solid #ccc; border-radius: 5px; white-space: pre-wrap; word-break: break-word; font-size: 14px;">
+  {{ token }}
+        </pre>
+        <button (click)="copyToken()" style="margin-top: 5px; padding: 5px 10px; background-color: #27ae60; color: white; border: none; border-radius: 3px;">
+          Copy JWT
+        </button>
+        <span *ngIf="jwtcopied" style="color: green; margin-left: 10px;">Copied!</span>
+      </div>
+    </div>
+  
+    <!-- Access Token Section -->
+    <div *ngIf="token" style="background: #ffffff; border: 1px solid #ddd; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+      <h3 style="color: #34495e;">Step 2: Get Access Token</h3>
+      <button (click)="GetAccessToken()" style="padding: 10px 20px; background-color: #8e44ad; color: white; border: none; border-radius: 4px; cursor: pointer;">
+        Get Access Token
+      </button>
+  
+      <div *ngIf="accesstoken" style="margin-top: 15px;">
+        <label><strong>Access Token:</strong></label>
+        <pre style="background-color: #f9f9f9; padding: 15px; border: 1px solid #ccc; border-radius: 5px; white-space: pre-wrap; word-break: break-word; font-size: 14px;">
+  {{ accesstoken }}
+        </pre>
+        <button (click)="copyAccessToken()" style="margin-top: 5px; padding: 5px 10px; background-color: #27ae60; color: white; border: none; border-radius: 3px;">
+          Copy Access Token
+        </button>
+        <span *ngIf="copied" style="color: green; margin-left: 10px;">Copied!</span>
+      </div>
+    </div>
+  
+    <!-- User Section -->
+    <div *ngIf="accesstoken" style="background: #ffffff; border: 1px solid #ddd; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+      <h3 style="color: #34495e;">Step 3: Fetch Users</h3>
+      <button (click)="GetUser()" style="padding: 10px 20px; background-color: #e67e22; color: white; border: none; border-radius: 4px; cursor: pointer;">
+        Get User
+      </button>
+  
+      <div *ngIf="users.length > 0" style="margin-top: 20px;">
+        <h4>User List:</h4>
+        <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+          <thead>
+            <tr style="background-color: #ecf0f1;">
+              <th style="padding: 10px; border: 1px solid #ddd;">Username</th>
+              <th style="padding: 10px; border: 1px solid #ddd;">User ID</th>
+              <th style="padding: 10px; border: 1px solid #ddd;">Google Authenticated</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of users">
+              <td style="padding: 10px; border: 1px solid #ddd;">{{ user.username }}</td>
+              <td style="padding: 10px; border: 1px solid #ddd;">{{ user.userid }}</td>
+              <td style="padding: 10px; border: 1px solid #ddd;">{{ user.isgoogleauthenticated ? 'Yes' : 'No' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  
+      <p *ngIf="users.length === 0" style="color: gray; margin-top: 10px;">No users found.</p>
+    </div>
+  </div>
+  
